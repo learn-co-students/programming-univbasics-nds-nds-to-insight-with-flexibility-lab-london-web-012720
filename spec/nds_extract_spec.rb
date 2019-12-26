@@ -7,6 +7,7 @@ describe 'provided method' do
     end
   end
 
+
   describe 'movie_with_director_name' do
     it "creates a new movie Hash with director's name provided" do
       director_name = "Byron Poodle"
