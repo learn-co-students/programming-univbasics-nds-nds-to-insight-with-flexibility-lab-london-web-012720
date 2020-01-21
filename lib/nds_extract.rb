@@ -64,22 +64,23 @@ end
 ###############################################################################
 
 def gross_per_studio(collection)
-pp collection
-result = { }
-puts "***************************"
+result = {}
 i=0
+total = 0
 
    while i < collection.size do
 
-     if result.has_value?(:studio)
-       result[i][:studio] = collection[i][:studio]
+     if result.include?( collection[i][:studio] )
+          store = collection[i][:studio]
+          total = collection[i][:worldwide_gross]
+          result[store] += total
       else
        result[collection[i][:studio]] = collection[i][:worldwide_gross]
      end
        i += 1
-       puts result
-    end
+     end
  return result
+ end
 
   # GOAL: Given an Array of Hashes where each Hash represents a movie,
   # return a Hash that includes the total worldwide_gross of all the movies from
@@ -89,12 +90,11 @@ i=0
   # RETURN:
   # Hash whose keys are the studio names and whose values are the sum
   # total of all the worldwide_gross numbers for every movie in the input Hash
-end
 
 ###############################################################################
 
 def movies_with_directors_set(source)
-   use = source[:name]
+   use = source[:director_name]
    neww = flatten_a_o_a(use)
 
   # GOAL: For each director, find their :movies Array and stick it in a new Array
@@ -102,9 +102,7 @@ def movies_with_directors_set(source)
   # INPUT:
   # * source: An Array of Hashes containing director information including
   # :name and :movies
-  #
   # RETURN:
-  #
   # Array of Arrays containing all of a director's movies. Each movie will need
   # to have a :director_name key added to it.
 end
