@@ -16,7 +16,6 @@ def flatten_a_o_a(aoa)
     end
     i += 1
   end
-p result
   result
 end
 ###############################################################################
@@ -42,9 +41,9 @@ i=0
     while i < movies_collection.size do
         part2 = movies_collection[i]
         arr << movie_with_director_name(part1,part2)
-        p arr
         i += 1
     end
+    puts arr
    return arr
 end
 # GOAL: For each Hash in an Array (movies_collection),
@@ -94,8 +93,17 @@ total = 0
 ###############################################################################
 
 def movies_with_directors_set(source)
-   use = source[:director_name]
-   neww = flatten_a_o_a(use)
+  row = 0
+    arr = []
+
+    while row < source.size do
+      name = source[row][:name]
+      movies = source[row][:movies]
+      arr << movies_with_director_key(name, movies)
+      row += 1
+    end
+    arr
+  end
 
   # GOAL: For each director, find their :movies Array and stick it in a new Array
   #
@@ -105,7 +113,7 @@ def movies_with_directors_set(source)
   # RETURN:
   # Array of Arrays containing all of a director's movies. Each movie will need
   # to have a :director_name key added to it.
-end
+
 ###############################################################################
 
 # ----------------    End of Your Code Region --------------------
