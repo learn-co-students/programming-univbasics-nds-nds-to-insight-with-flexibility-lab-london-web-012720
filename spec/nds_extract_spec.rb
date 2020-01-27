@@ -49,7 +49,7 @@ describe 'movies_with_directors_set' do
               { :title => "Biting" },
             ]
             }
-          ] 
+          ]
         }
 
         it 'correctly "distributes" Byron Poodle as :director_name of the first film' do
