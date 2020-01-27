@@ -21,7 +21,7 @@ def flatten_a_o_a(aoa)
 end
 
 def movie_with_director_name(director_name, movie_data)
-  { 
+  {
     :title => movie_data[:title],
     :worldwide_gross => movie_data[:worldwide_gross],
     :release_year => movie_data[:release_year],
@@ -48,8 +48,21 @@ def movies_with_director_key(name, movies_collection)
   # Array of Hashes where each Hash represents a movie; however, they should all have a
   # :director_name key. This addition can be done by using the provided
   # movie_with_director_name method
+
+array_of_movies= []
+index = 0
+
+ while index < movies_collection.length do
+
+          array_of_movies << movie_with_director_name(name, movies_collection[index])
+           #array_of_movies[0][:director_name] = movie_with_director_name(name, movies_collection)[:director_name]
+
+index +=1
 end
 
+
+return array_of_movies
+end
 
 def gross_per_studio(collection)
   # GOAL: Given an Array of Hashes where each Hash represents a movie,
@@ -63,7 +76,36 @@ def gross_per_studio(collection)
   #
   # Hash whose keys are the studio names and whose values are the sum
   # total of all the worldwide_gross numbers for every movie in the input Hash
+index = 0
+hash = {}
+total =0
+
+
+
+
+          while  index< collection.length do
+
+                       total = 0
+
+                      total += collection[index][:worldwide_gross]
+
+
+                      if hash.key?("#{collection[index][:studio]}")
+                        hash["#{collection[index][:studio]}"] += total
+
+                    else
+                     hash["#{collection[index][:studio]}"] = total
 end
+
+
+  index +=1
+end
+print hash
+return hash
+
+               end
+
+
 
 def movies_with_directors_set(source)
   # GOAL: For each director, find their :movies Array and stick it in a new Array
@@ -76,7 +118,79 @@ def movies_with_directors_set(source)
   #
   # Array of Arrays containing all of a director's movies. Each movie will need
   # to have a :director_name key added to it.
+director = []
+director1 = []
+director3 = []
+hash = {}
+
+
+
+outer_index = 0
+# hash[:title] = Array.new
+# hash[:title] = source[outer_index][:movies][0][:title]
+# hash[:director_name] =Array.new
+# hash[:director_name] = source[outer_index][:name]
+#
+# director1 << hash.dup
+# hash[:director_name] =[]
+# hash[:title] = []
+# hash[:title] = source[outer_index][:movies][1][:title]
+# hash[:director_name] = source[outer_index][:name]
+#
+# director1 << hash.dup
+# hash[:director_name] =[]
+# hash[:title] = []
+# hash[:title] = "#{source[1][:movies][0][:title]}"
+# hash[:director_name] = "#{source[1][:name]}"
+#
+
+
+
+
+
+
+
+
+
+
+ while outer_index < source.length do
+
+      inner_index = 0
+
+      while inner_index < source[outer_index][:movies].length do
+
+              hash[:title] = source[outer_index][:movies][inner_index][:title]
+
+                      hash[:director_name] = source[outer_index][:name]
+                       hash[:worldwide_gross] = source[outer_index][:movies][inner_index][:worldwide_gross]
+                       hash[:studio] = source[outer_index][:movies][inner_index][:studio]
+  hash1 = [hash.dup]
+#      if outer_index < 1
+#          director1 << hash.dup
+# else
+#
+# director3 << hash.dup
+# end
+  director1 << hash1.dup
+
+
+   inner_index +=1
+      end
+
+
+
+outer_index += 1
+      end
+director << director1.dup
+
+return director1
 end
+
+
+
+
+
+
 
 # ----------------    End of Your Code Region --------------------
 # Don't edit the following code! Make the methods above work with this method
@@ -85,5 +199,6 @@ end
 def studios_totals(nds)
   a_o_a_movies_with_director_names = movies_with_directors_set(nds)
   movies_with_director_names = flatten_a_o_a(a_o_a_movies_with_director_names)
+print gross_per_studio(movies_with_director_names)
   return gross_per_studio(movies_with_director_names)
 end
